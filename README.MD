@@ -1,7 +1,7 @@
-# debugger_for_small_scripts
+# TinyTinyDebugger
 
 Simple debugger for small scripts - shows the line being executed, local vars, log files as xlsx
-
+It only can be used if your script is in a .py file. It doesn't work directly from the console.
 ```python
 pip install TinyTinyDebugger
 ```
@@ -53,7 +53,7 @@ test4_exception(199, 34)
 ```
 
 <div>
-<img title="" src="https://raw.githubusercontent.com/hansalemaos/debugger_for_small_scripts/main/screen2.png" alt="">
+<img title="" src="https://raw.githubusercontent.com/hansalemaos/TinyTinyDebugger/main/screen2.png" alt="">
 </div>
 
 ```python
@@ -101,5 +101,5 @@ test4_exception(199, 34)
 ```
 
 <div>
-<img title="" src="https://raw.githubusercontent.com/hansalemaos/debugger_for_small_scripts/main/screen1.png" alt="">
+<img title="" src="https://raw.githubusercontent.com/hansalemaos/TinyTinyDebugger/main/screen1.png" alt="">
 </div>
