@@ -1,6 +1,6 @@
 # TinyTinyDebugger
 
-Simple debugger for small scripts - shows the line being executed, local vars, log files as xlsx
+Simple debugger for small scripts - shows the line being executed, local vars ...
 It only can be used if your script is in a .py file. It doesn't work directly from the console.
 ```python
 pip install TinyTinyDebugger
@@ -8,98 +8,52 @@ pip install TinyTinyDebugger
 
 ```python
 #Examples
-from TinyTinyDebugger import get_detailed_debugger
+from TinyTinyDebugger import (
+function_debug,
+detailed_debugger
+)
 
-#Configurations for all debugged functions with
-detailed_debugger = get_detailed_debugger()
-detailed_debugger.enabled = True
-detailed_debugger.write_log_file = True
-detailed_debugger.log_folder = "f:\\mylogstest2"
-detailed_debugger.pause_for_n_seconds_when_exception = 1
-detailed_debugger.continue_on_exceptions = True
-detailed_debugger.print_write_exceptions_only = False
-
-
-@detailed_debugger
-def test1(x, y):
-    vara = x * y * 1000
-
-
-@detailed_debugger
-def test2(x, y):
-    test2 = x * y * 6
-    test3 = x * y * 16
-    return x * y
+@function_debug(
+sleep_between_each_line=1)
+def combinations(iterable, r):
+    pool = tuple(iterable)
+    n = len(pool)
+    if r > n:
+        print('r bigger n')
+    indices = list(range(r))
+    # provoking an Exception
+    wrong = indices / 0
+    return indices
+#combinations("ABCD", 2)
+from pprint import pprint
 
 
-@detailed_debugger
-def test3(*args, **kwargs):
-    hal = "hallo" in kwargs
-    return args
+
+@function_debug(
+    active=True,  # used to disable the debugger
+    write_log_file=False,  # if True, data will be saved to hdd. Import allow_long_path_windows from windows_filepath and execute before! function_debug won't check for path length, so it is better to allow long file names
+    log_folder='c:\\debugmyfunction',  # default value is the folder "_tinytinydebugger_log" in cwd
+    pause_for_n_seconds_when_except=10,  # Only important if continue_on_exceptions is True. The execution will be paused and you can read the Exception. When you are done, press ctrl+c to continue
+    continue_on_exceptions=True,  # if True, the execution will go on
+    capture_local_vars=True,  # If True, all local variables in the function will be saved after each line in: detailed_debugger.local_function_vars
+    color_print=True,  # black/white or colored
+    print_line=True,  # If False, the event "line" won't be printed
+    print_return=True,  # If False, the event "return" won't be printed
+    print_exception=True,  # If False, the event "exception" won't be printed
+    print_execution_time=True,  # enable/disable printing of execution time
+    print_local_vars=True,  # if True: prints all local variables in the function each line
+    sleep_between_each_line=0,  # sleep after each line of code
+)
+def baba(x):
+    print(4/x)
+
+baba(10)
+pprint(detailed_debugger
+       .local_function_vars)
 
 
-@detailed_debugger
-def test4_exception(x, t):
-    tt = t * t
-    j = 0
-    p = x / j
-    return p
-
-
-test1(44, 44)
-test2(44, 122)
-test3(3, 4, 4, hallo="baba")
-test4_exception(199, 34)
 ```
 
-<div>
-<img title="" src="https://raw.githubusercontent.com/hansalemaos/TinyTinyDebugger/main/screen2.png" alt="">
-</div>
-
-```python
-from TinyTinyDebugger import get_detailed_debugger
-##Let's use some other configurations
-detailed_debugger = get_detailed_debugger()
-detailed_debugger.enabled = True
-detailed_debugger.write_log_file = False
-detailed_debugger.log_folder = "f:\\mylogstest2"
-detailed_debugger.pause_for_n_seconds_when_exception = 1
-detailed_debugger.continue_on_exceptions = True
-detailed_debugger.print_write_exceptions_only = True
-
-
-@detailed_debugger
-def test1(x, y):
-    vara = x * y * 1000
-
-
-@detailed_debugger
-def test2(x, y):
-    test2 = x * y * 6
-    test3 = x * y * 16
-    return x * y
-
-
-@detailed_debugger
-def test3(*args, **kwargs):
-    hal = "hallo" in kwargs
-    return args
-
-
-@detailed_debugger
-def test4_exception(x, t):
-    tt = t * t
-    j = 0
-    p = x / j
-    return p
-
-
-test1(44, 44)
-test2(44, 122)
-test3(3, 4, 4, hallo="baba")
-test4_exception(199, 34)
-```
-
-<div>
-<img title="" src="https://raw.githubusercontent.com/hansalemaos/TinyTinyDebugger/main/screen1.png" alt="">
-</div>
+Take a look at the video:
+[![YT](https://github.com/hansalemaos/screenshots/raw/main/errorcode.png)](https://www.youtube.com/shorts/Jk-ZhFeJJ-A)
+[https://www.youtube.com/shorts/Jk-ZhFeJJ-A]()
