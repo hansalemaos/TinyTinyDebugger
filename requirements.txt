@@ -1,5 +1,6 @@
+copy_functions_and_more
 cprinter
-decorator
-input_timeout
-pandas
-PrettyColorPrinter
+files_folders_with_timestamp
+sleepchunk
+tolerant_isinstance
+windows_filepath
